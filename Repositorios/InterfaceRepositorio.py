@@ -57,7 +57,9 @@ class InterfaceRepositorio(Generic[T]):
 
     def findById(self, id):
         laColeccion = self.baseDatos[self.coleccion]
+        #print(laColeccion,id)
         x = laColeccion.find_one({"_id": ObjectId(id)})
+        #print(x)
         x = self.getValuesDBRef(x)
         if x == None:
             x = {}
@@ -97,6 +99,7 @@ class InterfaceRepositorio(Generic[T]):
 
     def getValuesDBRef(self, x):
         keys = x.keys()
+        #print(x)
         for k in keys:
             if isinstance(x[k], DBRef):
                 laColeccion = self.baseDatos[x[k].collection]
